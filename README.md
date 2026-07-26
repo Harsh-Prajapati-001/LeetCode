@@ -1,4 +1,4 @@
-**#Leetcode**
+# Leetcode
 Automated archive of my LeetCode submissions, tracking my progress in mastering data structures, algorithms, and system optimization.
 
 # LeetCode Solutions & DSA Journey
@@ -9,7 +9,7 @@ Optimizing Performance: Practice writing highly efficient algorithms, which is c
 Track Consistency: Maintain a regular coding habit and visually track my progress over time.
 Create a Reference Library: Build a well-organized, personal database of algorithms and data structure implementations for future reference.
 
-⚙️ How It Works
+# ⚙️ How It Works
 
 This repository is maintained automatically. Every time I successfully submit an accepted solution on LeetCode.
 
@@ -17,7 +17,7 @@ Each problem has its own dedicated directory containing:
 The accepted solution source code.
 A `README.md` with the problem statement, constraints, and examples.
 
-📚 Topics Covered
+# 📚 Topics Covered
 As the repository grows, it will include solutions across a variety of core computer science topics:
 * Arrays & Hashing
 * Two Pointers & Sliding Window
@@ -29,7 +29,7 @@ As the repository grows, it will include solutions across a variety of core comp
 * Backtracking
 * Math & Geometry
 
-🚀 LeetCode Profile
+# 🚀 LeetCode Profile
 You can view my full LeetCode profile and current statistics here: 
 https://leetcode.com/u/ua8mBc9j52/
 
