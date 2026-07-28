@@ -4,22 +4,14 @@ class Solution {
         int r = s.length();
         int i =0;
         int j =0;
-        int [] ress = new int[r];
-        boolean res = true;
         while(j<n && i<r){
-            if(t.charAt(j)!= s.charAt(i)){
-                j++;
-            } else if(i < r && t.charAt(j)==s.charAt(i)){
-             ress[i] =1;
+             if(t.charAt(j)==s.charAt(i)){
              i++;
             }
+            j++;
         }
-        for(int k =0; k<r;k++){
-            if(ress[k] !=1){
-                res =false;
-            }
-        }
-        return res;
+
+        return i==s.length();
         
     }
 }
