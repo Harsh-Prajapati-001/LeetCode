@@ -4,14 +4,14 @@ class Solution {
         int n = s.length();
         int i =0;
         int j =0;
-        while(j<r() && i<n){
+        while(j<r && i<n){
              if(t.charAt(j)==s.charAt(i)){
              i++;
             }
             j++;
         }
 
-        return i==s.length();
+        return i==n;
         
     }
 }
