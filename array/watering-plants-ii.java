@@ -4,27 +4,24 @@ class Solution {
         int refill= 0;
         int n =plants.length;
         int i =0; int j = n-1;
-        while(i<=j){
-            if(i==j && Math.max(a,b) >= plants[i]){
-                break;
-            }else if(i == j && Math.max(a,b) < plants[i]){
-                refill++;
-            } 
-            while(i<j && a>=plants[i]){
-               i++;
-               a = a-plants[i];
-            } if(i<j && a<plants[i]){
+        while(i<j){
+            if(a<plants[i]){
                 refill++;
                 a = capacityA;
-            }
-            while(i<j && b>= plants[j]){
-                j--;
-                b = b-plants[j];
-            } if(i<j && b<plants[j]){
+            } a = a-plants[i];
+            i++;
+            if(b<plants[j]){
                 refill++;
-                b = capacityB;
-            }
+                b= capacityB;
+            } b= b- plants[j];
+            j--;
+
             
+        }
+        if(i ==j){
+            if(Math.max(a,b) < plants[i]){
+                refill++;
+            }    
         }
         return refill;
     }
