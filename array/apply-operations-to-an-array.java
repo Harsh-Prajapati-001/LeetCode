@@ -18,7 +18,7 @@ class Solution {
         if(nums[j]!= 0){
             nums[k] =nums[j];
             nums[j] = 0;
-            j++;
+            k++;
         }
        }
        return nums;
