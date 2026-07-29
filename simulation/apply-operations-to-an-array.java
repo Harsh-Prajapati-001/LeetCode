@@ -14,6 +14,7 @@ class Solution {
             break;
           }
        }
+       if(k <0) return nums;
        for(int j =k+1; j<n;j++){
         if(nums[j]!= 0){
             nums[k] =nums[j];
