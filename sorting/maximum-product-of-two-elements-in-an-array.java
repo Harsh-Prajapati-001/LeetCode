@@ -1,8 +1,11 @@
 class Solution {
     public int maxProduct(int[] nums) {
         int n = nums.length;
-        int sec = 0;
+        int sec = Integer.MIN_VALUE;
         int max = Integer.MIN_VALUE;
+        if(n==2){
+            return ((nums[0]-1) *(nums[1]-1));
+        }
         for(int k =0;k<n;k++){
             if(nums[k]> max ){
                 sec = max;
