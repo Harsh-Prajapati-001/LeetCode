@@ -9,7 +9,7 @@ class Solution {
         while(i<n && j<m){
             if(s[j] >=g[i] ){
                 i++;
-            } else{j++;}
+            }j++;
         }
         return i;
     }
