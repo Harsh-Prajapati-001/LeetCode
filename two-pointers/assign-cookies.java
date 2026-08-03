@@ -5,7 +5,7 @@ class Solution {
         
         for(int i=0; i<n;i++){
             int k =0;
-            while(k<s.length && res<=n){
+            while(k<s.length && res<n){
                 if(s[k] == g[i]){
                     s[k] =-1;
                     k++; res++;
