@@ -10,7 +10,7 @@ class Solution {
                     s[k] =-1;
                     k++; res++;
                 }
-                k++;
+                else{k++; }
             }
         }
     return res;
