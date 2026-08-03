@@ -13,7 +13,7 @@ class Solution {
                 freq[i]--;
             }
         }
-        for(int j =0; j<1000; j++){
+        for(int j =0; j<=1000; j++){
             while(freq[j]>0){
                 result[idx++] =j;
                 freq[j]--;
