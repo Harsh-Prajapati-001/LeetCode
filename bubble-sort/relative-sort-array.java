@@ -5,7 +5,7 @@ class Solution {
         int i = 0;
         int k =0;
         while(i<n){
-            for (int j =0; j<m; j++){
+            for (int j =k; j<m; j++){
                 if(arr1[j] ==arr2[i]){
                     int temp = arr1[k];
                     arr1[k] = arr1[j];
