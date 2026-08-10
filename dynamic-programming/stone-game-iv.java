@@ -1,7 +1,5 @@
 class Solution {
     public boolean winnerSquareGame(int n) {
-        class Solution {
-    public boolean winnerSquareGame(int n) {
 
         boolean[] dp = new boolean[n + 1];
 
@@ -19,7 +17,5 @@ class Solution {
         }
 
         return dp[n];
-    }
-}
     }
 }
