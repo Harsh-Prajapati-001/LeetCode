@@ -1,23 +1,20 @@
 import java.util.*;
-
 class Solution {
     public int sumDivisibleByK(int[] nums, int k) {
-        Map<Integer, Integer> freq = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
 
-        // Count frequency of each number
         for (int num : nums) {
-            freq.put(num, freq.getOrDefault(num, 0) + 1);
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
         int ans = 0;
 
-        // Add number * frequency if frequency is divisible by k
-        for (Map.Entry<Integer, Integer> entry : freq.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int num = entry.getKey();
-            int count = entry.getValue();
+            int freq = entry.getValue();
 
-            if (count % k == 0) {
-                ans += num * count;
+            if (freq % k == 0) {
+                ans += num * freq;
             }
         }
 
