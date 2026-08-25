@@ -1,23 +1,19 @@
 import java.util.*;
+
 class Solution {
-    public int sumDivisibleByK(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
+    public int missingMultiple(int[] nums, int k) {
+        Set<Integer> set = new HashSet<>();
 
         for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            set.add(num);
         }
 
-        int ans = 0;
+        int multiple = k;
 
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            int num = entry.getKey();
-            int freq = entry.getValue();
-
-            if (freq % k == 0) {
-                ans += num * freq;
-            }
+        while (set.contains(multiple)) {
+            multiple += k;
         }
 
-        return ans;
+        return multiple;
     }
 }
