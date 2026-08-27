@@ -1,49 +1,61 @@
-import java.util.*;
-
 class Solution {
     public String lexGreaterPermutation(String s, String target) {
-        char[] chars = s.toCharArray();
-        Arrays.sort(chars);
+        int n = s.length();
+        int[] cnt = new int[26];
 
-        // Try to construct the smallest permutation > target
-        StringBuilder ans = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
 
-        boolean[] used = new boolean[chars.length];
+        for (int i = 0; i < n; i++) {
+            int x = target.charAt(i) - 'a';
 
-        if (backtrack(chars, target, ans, used, 0)) {
-            return ans.toString();
+            if (cnt[x] == 0) {
+                for (int c = x + 1; c < 26; c++) {
+                    if (cnt[c] > 0) {
+                        return build(cnt, target, i, c);
+                    }
+                }
+
+                return backtrack(cnt, target, i - 1);
+            }
+
+            cnt[x]--;
+        }
+
+        return backtrack(cnt, target, n - 1);
+    }
+
+    private String backtrack(int[] cnt, String target, int pos) {
+        for (int i = pos; i >= 0; i--) {
+            int x = target.charAt(i) - 'a';
+            cnt[x]++;
+
+            for (int c = x + 1; c < 26; c++) {
+                if (cnt[c] > 0) {
+                    return build(cnt, target, i, c);
+                }
+            }
         }
 
         return "";
     }
 
-    private boolean backtrack(char[] chars, String target,
-                              StringBuilder ans, boolean[] used, int pos) {
+    private String build(int[] cnt, String target, int pos, int c) {
+        StringBuilder ans = new StringBuilder();
 
-        if (pos == chars.length) {
-            return ans.toString().compareTo(target) > 0;
+        ans.append(target, 0, pos);
+        ans.append((char) ('a' + c));
+
+        cnt[c]--;
+
+        for (int i = 0; i < 26; i++) {
+            while (cnt[i] > 0) {
+                ans.append((char) ('a' + i));
+                cnt[i]--;
+            }
         }
 
-        char previous = 0;
-
-        for (int i = 0; i < chars.length; i++) {
-            if (used[i] || chars[i] == previous) {
-                continue;
-            }
-
-            previous = chars[i];
-
-            ans.append(chars[i]);
-            used[i] = true;
-
-            if (backtrack(chars, target, ans, used, pos + 1)) {
-                return true;
-            }
-
-            used[i] = false;
-            ans.deleteCharAt(ans.length() - 1);
-        }
-
-        return false;
+        return ans.toString();
     }
 }
