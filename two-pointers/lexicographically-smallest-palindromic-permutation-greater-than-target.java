@@ -1,100 +1,106 @@
 class Solution {
     public String lexPalindromicPermutation(String s, String target) {
         int n = s.length();
-        int half = n / 2;
-
-        int[] count = new int[26];
+        int[] freq = new int[26];
 
         for (char c : s.toCharArray()) {
-            count[c - 'a']++;
+            freq[c - 'a']++;
         }
 
         int odd = 0;
-        int middle = -1;
+        int mid = -1;
 
         for (int i = 0; i < 26; i++) {
-            if ((count[i] & 1) != 0) {
+            if ((freq[i] & 1) != 0) {
                 odd++;
-                middle = i;
+                mid = i;
             }
-            count[i] /= 2;
         }
 
         if (odd > 1) {
             return "";
         }
 
-        int[] remaining = count.clone();
+        for (int i = 0; i < 26; i++) {
+            freq[i] /= 2;
+        }
 
-        int matched = 0;
+        char[] ans = new char[n];
+        int half = n / 2;
 
-        while (matched < half) {
-            int x = target.charAt(matched) - 'a';
+        for (int i = 0; i < half; i++) {
+            ans[i] = target.charAt(i);
+        }
 
-            if (remaining[x] == 0) {
+        int pos = 0;
+
+        while (pos < half) {
+            int c = target.charAt(pos) - 'a';
+
+            if (freq[c] == 0) {
                 break;
             }
 
-            remaining[x]--;
-            matched++;
+            freq[c]--;
+            pos++;
         }
 
-        if (matched == half) {
-            String left = target.substring(0, half);
+        if (pos == half) {
+            build(ans, freq, mid, half);
 
-            StringBuilder ans = new StringBuilder(left);
-
-            if (middle != -1) {
-                ans.append((char) ('a' + middle));
-            }
-
-            ans.append(new StringBuilder(left).reverse());
-
-            if (ans.toString().compareTo(target) > 0) {
-                return ans.toString();
+            if (new String(ans).compareTo(target) > 0) {
+                return new String(ans);
             }
         }
 
-        int i = matched == half ? half - 1 : matched;
+        while (pos >= 0) {
+            if (pos < half) {
+                int current = target.charAt(pos) - 'a';
 
-        while (i >= 0) {
-            int x = target.charAt(i) - 'a';
+                for (int c = current + 1; c < 26; c++) {
+                    if (freq[c] > 0) {
+                        ans[pos] = (char) ('a' + c);
+                        freq[c]--;
 
-            remaining[x]++;
+                        int index = pos + 1;
 
-            for (int c = x + 1; c < 26; c++) {
-                if (remaining[c] == 0) {
-                    continue;
-                }
+                        for (int j = 0; j < 26; j++) {
+                            while (freq[j] > 0) {
+                                ans[index++] = (char) ('a' + j);
+                                freq[j]--;
+                            }
+                        }
 
-                StringBuilder left = new StringBuilder();
+                        build(ans, freq, mid, half);
 
-                left.append(target, 0, i);
-                left.append((char) ('a' + c));
-
-                remaining[c]--;
-
-                for (int j = 0; j < 26; j++) {
-                    while (remaining[j] > 0) {
-                        left.append((char) ('a' + j));
-                        remaining[j]--;
+                        return new String(ans);
                     }
                 }
-
-                StringBuilder ans = new StringBuilder(left);
-
-                if (middle != -1) {
-                    ans.append((char) ('a' + middle));
-                }
-
-                ans.append(new StringBuilder(left).reverse());
-
-                return ans.toString();
             }
 
-            i--;
+            if (pos == 0) {
+                return "";
+            }
+
+            pos--;
+
+            int c = target.charAt(pos) - 'a';
+            freq[c]++;
+            ans[pos] = target.charAt(pos);
         }
 
         return "";
+    }
+
+    private void build(char[] ans, int[] freq, int mid, int half) {
+        int n = ans.length;
+
+        if (mid != -1) {
+            ans[half] = (char) ('a' + mid);
+        }
+
+        for (int i = 0; i < half; i++) {
+            ans[n - 1 - i] = ans[i];
+        }
     }
 }
